@@ -16,13 +16,9 @@ import proyectoalgoritmos.api.Nodo;
 public class Negocio {
 
     private ListaSimple secuencia;//Vector de subsecuencias
-    private ListaSimple subsMayor;//Subsecuencia mas larga
-    private ListaSimple sumZero;//Subsecuencia de suma cero
 
     public Negocio() {
         this.secuencia = new ListaSimple();
-        this.subsMayor = new ListaSimple();
-        this.sumZero = new ListaSimple();
     }
 
     /**
@@ -36,34 +32,29 @@ public class Negocio {
         this.procesarArchivo(ruta);
         int n = this.secuencia.getSize();
         Nodo nodo= this.secuencia.getCab();
-         LinkedList<Integer> l1 = new LinkedList<Integer>(), 
-                            l2 = new LinkedList<Integer>();
+         ListaSimple l1 = new ListaSimple(), 
+                            l2 = new ListaSimple();
         int aux = 0;
         while (n > 0) {
             n--;
             int temp = nodo.getInfo();
             nodo = nodo.getSig();
             if (temp > aux) {
-                l2.add(temp);
+                l2.addFin(temp);
                 aux = temp;
             } else {
                 aux = temp;
-                if (l2.size() > l1.size()) {
+                if (l2.getSize() > l1.getSize()) {
                     l1 = l2;
                 }
-                l2 = new LinkedList<Integer>();
-                l2.add(temp);
+                l2 = new ListaSimple();
+                l2.addFin(temp);
             }
-            
         }
-        for (Integer integer : l1) {
-            this.subsMayor.addFin(integer);
-        }
-  
-        return "Secuencia entrante: "+"\n"+
+         return "Secuencia entrante: "+"\n"+
                 this.secuencia.toString()+
                 "\n"+"Secuencia Mayor: "+
-                "\n"+this.subsMayor.toString();
+                "\n"+l1.toString();
     }
 
     public String hallarSubsecuenciaLargaRecursiva(String ruta) {
@@ -75,7 +66,7 @@ public class Negocio {
         return "Secuencia entrante: "+"\n"+
                 this.secuencia.toString()+
                 "\n"+"Secuencia Mayor: "+
-                "\n"+this.subsMayor.toString();
+                "\n";
     }
 
     private Nodo hallarSubs(Nodo cab) {
@@ -89,7 +80,7 @@ public class Negocio {
         return "Secuencia entrante: "+"\n"+
                 this.secuencia.toString()+
                 "\n"+"Secuencia Suma Cero: "+
-                "\n"+this.sumZero.toString();
+                "\n";
     }
 
     private ArrayList<String> leerArchivo(String nombreArchivo) {
