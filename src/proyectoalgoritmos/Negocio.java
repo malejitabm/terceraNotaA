@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import proyectoalgoritmos.api.ListaSimple;
+import proyectoalgoritmos.api.Lista;
 import proyectoalgoritmos.api.Nodo;
 
 /**
@@ -14,10 +14,10 @@ import proyectoalgoritmos.api.Nodo;
  */
 public class Negocio {
 
-    private ListaSimple secuencia;//Vector de subsecuencias
+    private Lista secuencia;//Vector de subsecuencias
 
     public Negocio() {
-        this.secuencia = new ListaSimple();
+        this.secuencia = new Lista();
     }
 
     /**
@@ -31,8 +31,8 @@ public class Negocio {
         this.procesarArchivo(ruta);
         int n = this.secuencia.getSize();
         Nodo nodo = this.secuencia.getCab();
-        ListaSimple l1 = new ListaSimple(),
-                l2 = new ListaSimple();
+        Lista l1 = new Lista();
+        Lista l2 = new Lista();
         int aux = 0;
         while (n > 0) {
             n--;
@@ -46,7 +46,7 @@ public class Negocio {
                 if (l2.getSize() > l1.getSize()) {
                     l1 = l2;
                 }
-                l2 = new ListaSimple();
+                l2 = new Lista();
                 l2.addFin(temp);
             }
         }
@@ -68,46 +68,58 @@ public class Negocio {
                 + "\n";
     }
 
-    private Nodo hallarSubs(Nodo cab) {
-        return null;
-    }
-
     public String hallarSubsecuenciaCero(String ruta) {
 
         this.procesarArchivo(ruta);
         //hallar secuencia suma cero
+
+        ArrayList<Lista> temp = this.hallarSecuenciaConsecutivo();
+
         Nodo inicio = this.secuencia.getCab();
-        boolean encontro=false;
+        boolean encontro = false;
         Nodo fin = null;
         Nodo aux = null;
         int suma = 0;
 
-        while (inicio != null && !encontro ) {
+        while (inicio != null && !encontro) {
             aux = inicio;
-            while (aux != null) {
-                
-                suma += aux.getInfo();
-                System.out.println(suma);
-                
-                if (suma == 0) {
-                    fin = aux;
-                    encontro= true;
-                    break;
-                } else {
-                    aux = aux.getSig();
+            
+            while (aux.getSig() != null) {
+               
+                if (aux.getInfo() + 1 == aux.getSig().getInfo()) {
+                    suma += aux.getInfo();
+                    if (suma == 0) {
+                        fin = aux;
+                        encontro = true;
+                        break;
+                    }
                 }
+                aux = aux.getSig();
             }
-            if(encontro){
+            if (encontro) {
                 break;
             }
-            suma=0;
+            suma = 0;
             inicio = inicio.getSig();
         }
-        System.out.println(inicio.getInfo()+"--"+fin.getInfo());
+        System.out.println(inicio.getInfo() + "--" + fin.getInfo());
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
                 + "\n";
+    }
+
+    private ArrayList hallarSecuenciaConsecutivo() {
+
+        ArrayList<Lista> temp = new ArrayList<>();
+        Nodo aux = this.secuencia.getCab();
+        int mayor = aux.getInfo();
+
+        while (aux.getSig() != null) {
+
+        }
+
+        return temp;
     }
 
     private ArrayList<String> leerArchivo(String nombreArchivo) {
@@ -143,7 +155,7 @@ public class Negocio {
         ArrayList<String> lineas = leerArchivo(nombreArchivo);
         if (lineas != null) {
             for (String s : lineas) {
-                ListaSimple sub = new ListaSimple();
+                Lista sub = new Lista();
                 subs = s.split("/");
                 for (int i = 0; i < subs.length; i++) {
                     this.secuencia.addFin(Integer.valueOf(subs[i]));

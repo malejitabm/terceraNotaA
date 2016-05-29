@@ -14,7 +14,7 @@ public class Nodo {
         this.sig = null;
     }
 
-   public Nodo(int info, Nodo sig) {
+   public Nodo(int info,Nodo sig) {
         this.info = info;
         this.sig = sig;
     }
@@ -35,9 +35,5 @@ public class Nodo {
         this.sig = nuevo;
     }
 
-    @Override
-    public Object clone() {
-        return (new Nodo(this.info, this.sig));
-    }
 
 }

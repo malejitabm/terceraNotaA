@@ -2,23 +2,24 @@ package proyectoalgoritmos.api;
 
 /**
  *
- * @author Alejandra Bohorquez 1151109
+ * @author Alejandra Bohorquez 
+ * LISTA SIMPLE
  */
-public class ListaSimple {
+public class Lista {
 
     private Nodo cab;
     private int size;
-    public ListaSimple() {
+    public Lista() {
         this.cab = null;
     }
 
-    public ListaSimple(Nodo cab) {
+    public Lista(Nodo cab) {
         this.cab = cab;
         this.size++;
     }
 
     public void addInicio(int x) {
-        this.cab = new Nodo(x, this.cab);
+        this.cab = new Nodo(x,this.cab);
 
     }
 
@@ -30,7 +31,7 @@ public class ListaSimple {
             while (aux.getSig() != null) {
                 aux = aux.getSig();
             }
-            aux.setSig(new Nodo(x, null));
+            aux.setSig(new Nodo(x,null));
         }
         this.size++;
     }
@@ -67,10 +68,6 @@ public class ListaSimple {
         this.size = size;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone(); //To change body of generated methods, choose Tools | Templates.
-    }
     
     
 }
