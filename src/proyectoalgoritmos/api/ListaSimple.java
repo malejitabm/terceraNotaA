@@ -66,4 +66,11 @@ public class ListaSimple {
     public void setSize(int size) {
         this.size = size;
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

@@ -5,7 +5,6 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import proyectoalgoritmos.api.ListaSimple;
 import proyectoalgoritmos.api.Nodo;
 
@@ -31,9 +30,9 @@ public class Negocio {
 
         this.procesarArchivo(ruta);
         int n = this.secuencia.getSize();
-        Nodo nodo= this.secuencia.getCab();
-         ListaSimple l1 = new ListaSimple(), 
-                            l2 = new ListaSimple();
+        Nodo nodo = this.secuencia.getCab();
+        ListaSimple l1 = new ListaSimple(),
+                l2 = new ListaSimple();
         int aux = 0;
         while (n > 0) {
             n--;
@@ -51,10 +50,10 @@ public class Negocio {
                 l2.addFin(temp);
             }
         }
-         return "Secuencia entrante: "+"\n"+
-                this.secuencia.toString()+
-                "\n"+"Secuencia Mayor: "+
-                "\n"+l1.toString();
+        return "Secuencia entrante: " + "\n"
+                + this.secuencia.toString()
+                + "\n" + "Secuencia Mayor: "
+                + "\n" + l1.toString();
     }
 
     public String hallarSubsecuenciaLargaRecursiva(String ruta) {
@@ -63,10 +62,10 @@ public class Negocio {
         //hallar la mas larga
         // recursivo
 
-        return "Secuencia entrante: "+"\n"+
-                this.secuencia.toString()+
-                "\n"+"Secuencia Mayor: "+
-                "\n";
+        return "Secuencia entrante: " + "\n"
+                + this.secuencia.toString()
+                + "\n" + "Secuencia Mayor: "
+                + "\n";
     }
 
     private Nodo hallarSubs(Nodo cab) {
@@ -76,11 +75,27 @@ public class Negocio {
     public String hallarSubsecuenciaCero(String ruta) {
 
         this.procesarArchivo(ruta);
-        //hallar secuencia 
-        return "Secuencia entrante: "+"\n"+
-                this.secuencia.toString()+
-                "\n"+"Secuencia Suma Cero: "+
-                "\n";
+        //hallar secuencia suma cero
+        Nodo inicio = this.secuencia.getCab();
+        Nodo fin = this.secuencia.getCab();
+        Nodo aux = this.secuencia.getCab();
+        int suma =0;
+       
+        while (aux!= null) {
+            suma += aux.getInfo();
+            if(suma==0){
+                break;
+            }else{
+                aux=aux.getSig();
+                fin =aux;
+            }
+            
+        }
+
+        return "Secuencia entrante: " + "\n"
+                + this.secuencia.toString()
+                + "\n" + "Secuencia Suma Cero: "
+                + "\n";
     }
 
     private ArrayList<String> leerArchivo(String nombreArchivo) {
@@ -105,7 +120,7 @@ public class Negocio {
             //Close the input stream
             in.close();
         } catch (Exception e) {//Catch exception if any
-           return null;
+            return null;
         }
 
         return lineas;
@@ -123,8 +138,7 @@ public class Negocio {
                 }
             }
         }
-      //this.secuencia.toString();
+        //this.secuencia.toString();
     }
-
 
 }
