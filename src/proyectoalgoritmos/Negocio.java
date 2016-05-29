@@ -77,21 +77,33 @@ public class Negocio {
         this.procesarArchivo(ruta);
         //hallar secuencia suma cero
         Nodo inicio = this.secuencia.getCab();
-        Nodo fin = this.secuencia.getCab();
-        Nodo aux = this.secuencia.getCab();
-        int suma =0;
-       
-        while (aux!= null) {
-            suma += aux.getInfo();
-            if(suma==0){
-                break;
-            }else{
-                aux=aux.getSig();
-                fin =aux;
-            }
-            
-        }
+        boolean encontro=false;
+        Nodo fin = null;
+        Nodo aux = null;
+        int suma = 0;
 
+        while (inicio != null && !encontro ) {
+            aux = inicio;
+            while (aux != null) {
+                
+                suma += aux.getInfo();
+                System.out.println(suma);
+                
+                if (suma == 0) {
+                    fin = aux;
+                    encontro= true;
+                    break;
+                } else {
+                    aux = aux.getSig();
+                }
+            }
+            if(encontro){
+                break;
+            }
+            suma=0;
+            inicio = inicio.getSig();
+        }
+        System.out.println(inicio.getInfo()+"--"+fin.getInfo());
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
