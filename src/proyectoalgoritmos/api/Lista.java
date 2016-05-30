@@ -42,14 +42,14 @@ public class Lista {
 
     public String toString() {
         if (this.esVacia()) {
-            return ("Lista Vacia");
+            return ("No hay Subsecuencia");
         }
         String r = "";
         for (Nodo x = this.cab; x != null; x = x.getSig()) {
-            r += x.getInfo() + "/";
+            r += " > "+x.getInfo();
 
         }
-        return (r+"null");
+        return (r);
     }
 
     public Nodo getCab() {

@@ -31,25 +31,32 @@ public class Negocio {
         this.procesarArchivo(ruta);
         int n = this.secuencia.getSize();
         Nodo nodo = this.secuencia.getCab();
+
         Lista l1 = new Lista();
         Lista l2 = new Lista();
         int aux = 0;
+
         while (n > 0) {
-            n--;
             int temp = nodo.getInfo();
-            nodo = nodo.getSig();
-            if (temp > aux) {
+            if (temp >= aux) {
                 l2.addFin(temp);
                 aux = temp;
             } else {
                 aux = temp;
-                if (l2.getSize() > l1.getSize()) {
+                if (l2.getSize() >= l1.getSize()) {
                     l1 = l2;
                 }
                 l2 = new Lista();
                 l2.addFin(temp);
             }
+            n--;
+            nodo = nodo.getSig();
         }
+
+        if (l2.getSize() >= l1.getSize()) {
+            l1 = l2;
+        }
+
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Mayor: "
@@ -71,25 +78,27 @@ public class Negocio {
     public String hallarSubsecuenciaCero(String ruta) {
 
         this.procesarArchivo(ruta);
-        //hallar secuencia suma cero
-
-        ArrayList<Lista> temp = this.hallarSecuenciaConsecutivo();
-
+        Lista temp = new Lista();
         Nodo inicio = this.secuencia.getCab();
         boolean encontro = false;
-        Nodo fin = null;
         Nodo aux = null;
         int suma = 0;
 
         while (inicio != null && !encontro) {
             aux = inicio;
-            
-            while (aux.getSig() != null) {
-               
-                if (aux.getInfo() + 1 == aux.getSig().getInfo()) {
+
+            while (aux != null) {
+                if (aux.getSig() == null) {
                     suma += aux.getInfo();
+                    temp.addFin(aux.getInfo());
                     if (suma == 0) {
-                        fin = aux;
+                        encontro = true;
+                        break;
+                    }
+                } else if (aux.getInfo() + 1 == aux.getSig().getInfo()) {
+                    suma += aux.getInfo();
+                    temp.addFin(aux.getInfo());
+                    if (suma == 0) {
                         encontro = true;
                         break;
                     }
@@ -98,28 +107,16 @@ public class Negocio {
             }
             if (encontro) {
                 break;
+            } else {
+                temp = new Lista();
             }
             suma = 0;
             inicio = inicio.getSig();
         }
-        System.out.println(inicio.getInfo() + "--" + fin.getInfo());
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
-                + "\n";
-    }
-
-    private ArrayList hallarSecuenciaConsecutivo() {
-
-        ArrayList<Lista> temp = new ArrayList<>();
-        Nodo aux = this.secuencia.getCab();
-        int mayor = aux.getInfo();
-
-        while (aux.getSig() != null) {
-
-        }
-
-        return temp;
+                + "\n" + temp.toString();
     }
 
     private ArrayList<String> leerArchivo(String nombreArchivo) {
