@@ -9,7 +9,6 @@ import proyectoalgoritmos.api.Lista;
 import proyectoalgoritmos.api.Nodo;
 
 /**
- *
  * @author Alejandra Bohorquez 1151109
  */
 public class Negocio {
@@ -66,57 +65,57 @@ public class Negocio {
     public String hallarSubsecuenciaLargaRecursiva(String ruta) {
 
         this.procesarArchivo(ruta);
-        //hallar la mas larga
-        // recursivo
+        Lista temp = new Lista();
+        Lista temp2 = new Lista();
+
+        temp = this.hallarSecRecur(this.secuencia.getCab(), 0, temp, temp2);
 
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Mayor: "
-                + "\n";
+                + "\n" + temp.toString();
+    }
+
+    private Lista hallarSecRecur(Nodo cab, int n, Lista temp, Lista temp2) {
+
+        return null;
     }
 
     public String hallarSubsecuenciaCero(String ruta) {
 
         this.procesarArchivo(ruta);
-        Lista temp = new Lista();
-        Nodo inicio = this.secuencia.getCab();
-        boolean encontro = false;
-        Nodo aux = null;
-        int suma = 0;
+        String cad = "";
+        int suma;
+        int i = 0;
 
-        while (inicio != null && !encontro) {
-            aux = inicio;
-
-            while (aux != null) {
-                if (aux.getSig() == null) {
-                    suma += aux.getInfo();
-                    temp.addFin(aux.getInfo());
-                    if (suma == 0) {
-                        encontro = true;
-                        break;
-                    }
-                } else if (aux.getInfo() + 1 == aux.getSig().getInfo()) {
-                    suma += aux.getInfo();
-                    temp.addFin(aux.getInfo());
-                    if (suma == 0) {
-                        encontro = true;
-                        break;
-                    }
-                }
-                aux = aux.getSig();
-            }
-            if (encontro) {
-                break;
-            } else {
-                temp = new Lista();
-            }
+        while (i < this.secuencia.getSize()) {
+            Nodo a = null;
+            Nodo b = null;
             suma = 0;
-            inicio = inicio.getSig();
+            cad = "";
+            Nodo aux = this.secuencia.getCab();
+            while (aux != null) {
+                a = aux;
+                b = aux.getSig();
+                if ((a.getInfo() + 1) == b.getInfo()) {
+                    suma += a.getInfo();
+                    cad += "  " + a.getInfo();
+
+                    if (suma + b.getInfo() == 0) {
+
+                        return cad + " " + b.getInfo();
+                    }
+                }else{
+                    break;
+                }
+            }
+            i++;
         }
+
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
-                + "\n" + temp.toString();
+                + "\n" + cad;
     }
 
     private ArrayList<String> leerArchivo(String nombreArchivo) {

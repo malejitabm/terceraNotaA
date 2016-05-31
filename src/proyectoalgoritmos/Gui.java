@@ -127,6 +127,8 @@ public class Gui extends javax.swing.JFrame {
         } else if (status == JFileChooser.CANCEL_OPTION) {
             this.mostrar.setText("No ha escogido Archivo.");
         }
+        this.negocio = new Negocio();
+
     }//GEN-LAST:event_secuenciaMayor2ActionPerformed
 
     private void secuenciaCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secuenciaCeroActionPerformed
@@ -143,6 +145,8 @@ public class Gui extends javax.swing.JFrame {
         } else if (status == JFileChooser.CANCEL_OPTION) {
             this.mostrar.setText("No ha escogido Archivo.");
         }
+        this.negocio = new Negocio();
+
     }//GEN-LAST:event_secuenciaCeroActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -164,6 +168,7 @@ public class Gui extends javax.swing.JFrame {
         } else if (status == JFileChooser.CANCEL_OPTION) {
             this.mostrar.setText("No ha escogido Archivo.");
         }
+        this.negocio = new Negocio();
     }//GEN-LAST:event_secuenciaMayor1ActionPerformed
 
     /**
