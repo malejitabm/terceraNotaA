@@ -121,11 +121,36 @@ public class Negocio {
     public String hallarSubsecuenciaCero(String ruta) {
 
         this.procesarArchivo(ruta);
-
+        
+        String cad ="";
+        int suma;
+        int i = 0;
+        while (i < this.secuencia.getSize()) {
+            Nodo aux = null;
+            Nodo aux2 = null;
+            suma = 0;
+            cad = "";
+            for (int j = i; j < this.secuencia.getSize()-1; j++) {
+                    aux = this.secuencia.getIndex(j);
+                    aux2 = this.secuencia.getIndex(j + 1);
+                if ((aux.getInfo() + 1) == aux2.getInfo() ) {
+                    suma += this.secuencia.getIndex(j).getInfo();
+                    cad += "  " + this.secuencia.getIndex(j).getInfo();
+                    if (suma+this.secuencia.getIndex(j+1).getInfo()== 0) {
+                      
+                        return  "/" +cad+" "+this.secuencia.getIndex(j+1).getInfo();
+                    }
+                } else{
+                    break;
+                }
+            }
+            i++;
+        }
+             
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
-                + "\n" + null;
+                + "\n" + cad;
     }
 
 }
