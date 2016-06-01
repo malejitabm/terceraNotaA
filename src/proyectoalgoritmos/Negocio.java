@@ -19,12 +19,49 @@ public class Negocio {
         this.secuencia = new Lista();
     }
 
-    /**
-     * Metodo que encuentra la subsecuencia ascendente mas larga
-     *
-     * @param ruta direccion del archivo
-     * @return la subsecuencia mas larga
-     */
+    private ArrayList<String> leerArchivo(String nombreArchivo) {
+        ArrayList<String> lineas = null;
+
+        try {
+            // Abre el archivo
+            FileInputStream fstream = new FileInputStream(nombreArchivo);
+            lineas = new ArrayList<String>();
+
+            // Obtiene el DataInputStream
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+
+            // Lee linea por linea
+            while ((strLine = br.readLine()) != null) {
+                // Print the content on the console
+                lineas.add(strLine);
+            }
+
+            //Close the input stream
+            in.close();
+        } catch (Exception e) {//Catch exception if any
+            return null;
+        }
+
+        return lineas;
+    }
+
+    private void procesarArchivo(String nombreArchivo) {
+        String[] subs = null;
+        ArrayList<String> lineas = leerArchivo(nombreArchivo);
+        if (lineas != null) {
+            for (String s : lineas) {
+                Lista sub = new Lista();
+                subs = s.split("/");
+                for (int i = 0; i < subs.length; i++) {
+                    this.secuencia.addFin(Integer.valueOf(subs[i]));
+                }
+            }
+        }
+        //this.secuencia.toString();
+    }
+
     public String hallarSubsecuenciaLargaIterativa(String ruta) {
 
         this.procesarArchivo(ruta);
@@ -89,49 +126,6 @@ public class Negocio {
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
                 + "\n" + null;
-    }
-
-    private ArrayList<String> leerArchivo(String nombreArchivo) {
-        ArrayList<String> lineas = null;
-
-        try {
-            // Abre el archivo
-            FileInputStream fstream = new FileInputStream(nombreArchivo);
-            lineas = new ArrayList<String>();
-
-            // Obtiene el DataInputStream
-            DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine;
-
-            // Lee linea por linea
-            while ((strLine = br.readLine()) != null) {
-                // Print the content on the console
-                lineas.add(strLine);
-            }
-
-            //Close the input stream
-            in.close();
-        } catch (Exception e) {//Catch exception if any
-            return null;
-        }
-
-        return lineas;
-    }
-
-    private void procesarArchivo(String nombreArchivo) {
-        String[] subs = null;
-        ArrayList<String> lineas = leerArchivo(nombreArchivo);
-        if (lineas != null) {
-            for (String s : lineas) {
-                Lista sub = new Lista();
-                subs = s.split("/");
-                for (int i = 0; i < subs.length; i++) {
-                    this.secuencia.addFin(Integer.valueOf(subs[i]));
-                }
-            }
-        }
-        //this.secuencia.toString();
     }
 
 }
