@@ -123,9 +123,9 @@ public class Negocio {
         this.procesarArchivo(ruta);
         
         Lista temp =new Lista();
-        int suma, i = 0;
-        while (i < this.secuencia.getSize()) {
-            Nodo aux = null, aux2 = null;
+        int suma = 0;
+        for (int i=0;i< this.secuencia.getSize();i++) {
+            Nodo aux ,aux2 = null;
             suma = 0;
             temp =new Lista();
             
@@ -144,7 +144,6 @@ public class Negocio {
                     break;
                 }
             }
-            i++;
         }
              
         return "Secuencia entrante: " + "\n"
