@@ -84,38 +84,11 @@ public class Negocio {
     public String hallarSubsecuenciaCero(String ruta) {
 
         this.procesarArchivo(ruta);
-        String cad = "";
-        int suma;
-        int i = 0;
-
-        while (i < this.secuencia.getSize()) {
-            Nodo a = null;
-            Nodo b = null;
-            suma = 0;
-            cad = "";
-            Nodo aux = this.secuencia.getCab();
-            while (aux != null) {
-                a = aux;
-                b = aux.getSig();
-                if ((a.getInfo() + 1) == b.getInfo()) {
-                    suma += a.getInfo();
-                    cad += "  " + a.getInfo();
-
-                    if (suma + b.getInfo() == 0) {
-
-                        return cad + " " + b.getInfo();
-                    }
-                }else{
-                    break;
-                }
-            }
-            i++;
-        }
 
         return "Secuencia entrante: " + "\n"
                 + this.secuencia.toString()
                 + "\n" + "Secuencia Suma Cero: "
-                + "\n" + cad;
+                + "\n" + null;
     }
 
     private ArrayList<String> leerArchivo(String nombreArchivo) {

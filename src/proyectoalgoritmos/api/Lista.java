@@ -40,6 +40,20 @@ public class Lista {
         return (this.cab == null);
     }
 
+    public Nodo getIndex(int i){
+        
+        Nodo aux = this.cab;
+        
+        while(i< this.size){
+          if(i==0){
+              return aux;
+          }
+            aux=aux.getSig();
+            i--;
+        }
+        return null;
+    }
+    
     public String toString() {
         if (this.esVacia()) {
             return ("No hay Subsecuencia");
