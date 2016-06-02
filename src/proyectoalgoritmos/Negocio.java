@@ -114,8 +114,8 @@ public class Negocio {
     }
 
     private Lista hallarSecRecur(Nodo cab, int n, Lista temp, Lista temp2) {
-
-        return null;
+     
+          return null;
     }
 
     public String hallarSubsecuenciaCero(String ruta) {
